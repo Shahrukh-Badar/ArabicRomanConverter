@@ -16,3 +16,7 @@ HUNDRED = 100
 THOUSAND = 1000
 
 EMPTY_STRING = ''
+DELIMITER = ','
+TEST_FILE_NAME = 'test_data.csv'
+
+MSG_INVALID_INPUT = f'Invalid input. Please select arabic number between {MIN_ROMAN} and {MAX_ROMAN - 1}.'

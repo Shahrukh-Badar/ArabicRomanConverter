@@ -30,9 +30,9 @@ class NumberConverter():
         if number == constants.ZERO:
             return constants.EMPTY_STRING
         roman_numeral = constants.EMPTY_STRING
-        one, three, four, five, eight, nine, ten = 1 * digit_place, \
+        one, three, four, five, nine, ten = 1 * digit_place, \
                                                    3 * digit_place, 4 * digit_place, 5 * digit_place, \
-                                                   8 * digit_place, 9 * digit_place, 10 * digit_place
+                                                   9 * digit_place, 10 * digit_place
 
         if digit_place == constants.TEN:
             number = number * digit_place
@@ -47,7 +47,7 @@ class NumberConverter():
             roman_numeral = constants.META_DATA[one] * int(number / digit_place)
         elif number == four:
             roman_numeral = constants.META_DATA[one] + constants.META_DATA[five]
-        elif number > five and number <= eight:
+        elif five < number < nine:
             roman_numeral = constants.META_DATA[five] + (
                     constants.META_DATA[one] * (int(number / digit_place) - int(five / digit_place)))
         elif number == nine:
@@ -66,8 +66,8 @@ class NumberConverter():
 
 
 if __name__ == "__main__":
-    arabic_number = 3999
-    if NumberConverter.validate_input(arabic_number):
-        print(NumberConverter.get_result(arabic_number))
+    input_arabic_number = 3999
+    if NumberConverter.validate_input(input_arabic_number):
+        print(NumberConverter.get_result(input_arabic_number))
     else:
-        print('Invalid Input.')
+        print(constants.MSG_INVALID_INPUT)
