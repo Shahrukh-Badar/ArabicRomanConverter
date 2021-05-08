@@ -1,4 +1,4 @@
-from src.main.python import constant as constants
+import constant as constants
 
 
 class NumberConverter():
@@ -26,6 +26,7 @@ class NumberConverter():
 
     @staticmethod
     def arabic_to_roman_converter(number, digit_place=constants.ONE):
+        number = int(number)
         if number == constants.ZERO:
             return constants.EMPTY_STRING
         roman_numeral = constants.EMPTY_STRING
@@ -53,17 +54,20 @@ class NumberConverter():
             roman_numeral = constants.META_DATA[one] + constants.META_DATA[ten]
         return roman_numeral
 
-
-# https://oeis.org/A006968/a006968.txt
+    @staticmethod
+    def validate_input(arabic_number):
+        in_valid_range = lambda num: int(num) in range(constants.MIN_ROMAN, constants.MAX_ROMAN)
+        if type(arabic_number) == int and in_valid_range(arabic_number):
+            return True
+        elif type(arabic_number) == str and arabic_number.strip().isnumeric() and in_valid_range(int(arabic_number)):
+            return True
+        else:
+            return False
 
 
 if __name__ == "__main__":
-    while True:
-        print("Please enter arabic numeral between 0 and 3999 and press enter. Enter 0 to exit.")
-        arabic_number = input()
-        if arabic_number.strip() == '0':
-            break
-        if arabic_number.strip().isnumeric() and int(arabic_number) in range(constants.MIN_ROMAN, constants.MAX_ROMAN):
-            print(NumberConverter.get_result(int(arabic_number.strip())))
-        else:
-            print("Invalid number.")
+    arabic_number = 3999
+    if NumberConverter.validate_input(arabic_number):
+        print(NumberConverter.get_result(arabic_number))
+    else:
+        print('Invalid Input.')
